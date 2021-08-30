@@ -31,9 +31,15 @@
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Please Sign In</h3>
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="" method="POST">
+                    <form action="{{ route('admin.auth.check-login') }}" method="POST">
+                        @csrf
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>

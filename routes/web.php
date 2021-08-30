@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Amin\AuthController;
 use App\Http\Controllers\Amin\CategoryController;
 use App\Http\Controllers\Amin\ContactController;
 use App\Http\Controllers\Amin\PostController;
@@ -13,12 +14,28 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function() {
+    Route::get('login', [AuthController::class, 'login'])
+        ->name('admin.auth.login');
+
+    Route::post('login', [AuthController::class, 'checkLogin'])
+        ->name('admin.auth.check-login');
+});
+
+Route::prefix('admin')->middleware('admin.login')->group(function() {
+
+    Route::get('logout', [AuthController::class, 'logout'])
+        ->name('admin.logout');
+    Route::get('profile', [AuthController::class, 'profile'])
+        ->name('admin.profile.index');
+    Route::put('profile', [AuthController::class, 'updateProfile'])
+        ->name('admin.profile.update');
+
     Route::prefix('category')->group(function() {
         Route::get('', [CategoryController::class, 'index'])
             ->name('admin.category.index');
 
         Route::get('create', [CategoryController::class, 'create'])
-            ->name('amin.category.create');
+            ->name('admin.category.create');
 
         Route::post('store', [CategoryController::class, 'store'])
             ->name('admin.category.store');
@@ -38,7 +55,7 @@ Route::prefix('admin')->group(function() {
             ->name('admin.post.index');
 
         Route::get('create', [PostController::class, 'create'])
-            ->name('amin.post.create');
+            ->name('admin.post.create');
 
         Route::post('store', [PostController::class, 'store'])
             ->name('admin.post.store');
