@@ -35,4 +35,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function imageUrl()
+    {
+        return '/image/post/'.$this->image;
+    }
 }

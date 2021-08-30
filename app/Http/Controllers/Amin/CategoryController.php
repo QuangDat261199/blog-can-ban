@@ -64,7 +64,7 @@ class CategoryController extends Controller
         $checkSlug = Category::where('slug', $slug)->first();
 
         while($checkSlug) {
-            $slug = $checkSlug->slug . Str::random(2);
+            $slug = $checkSlug->slug . "-" .Str::random(2);
         }
 
 //        $category = Category::find($id);
@@ -79,7 +79,7 @@ class CategoryController extends Controller
         ]);
 
 
-        return redirect()->route('admin.category.edit', $id)->with('success', 'create successfully');
+        return redirect()->route('admin.category.edit', $id)->with('success', 'update successfully');
     }
 
     public function delete($id)

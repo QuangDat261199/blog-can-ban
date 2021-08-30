@@ -6,41 +6,43 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
+                    <h1 class="page-header">Contact
                         <small>List</small>
                     </h1>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                 </div>
                 <!-- /.col-lg-12 -->
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Category Parent</th>
-                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Subject</th>
+                        <th>Message</th>
                         <th>Delete</th>
-                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($contacts as $contact)
                     <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Tin Tức</td>
-                        <td>None</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                        <td>{{ $contact->id }}</td>
+                        <td>{{ $contact->name }}</td>
+                        <td>{{ $contact->address }}</td>
+                        <td>{{ $contact->phone }}</td>
+                        <td>{{ $contact->subject }}</td>
+                        <td>{{ $contact->message }}</td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('admin.contact.delete', $contact->id) }}"> Delete</a></td>
                     </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Bóng Đá</td>
-                        <td>Thể Thao</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                {!! $contacts->links() !!}
             </div>
             <!-- /.row -->
         </div>

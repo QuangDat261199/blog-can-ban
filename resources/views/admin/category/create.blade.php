@@ -21,7 +21,7 @@
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
 
-                    <form action="{{ route("amin.category.store") }}" method="POST">
+                    <form action="{{ route("admin.category.store") }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label>Category Name</label>
