@@ -36,7 +36,7 @@ class PostController extends Controller
             ]
         );
 
-        $slug = Str::slug($request->name);
+        $slug = Str::slug($request->title);
 
         $checkSlug = Post::where('slug', $slug)->first();
 
@@ -97,7 +97,7 @@ class PostController extends Controller
             ]
         );
 
-        $slug = Str::slug($request->name);
+        $slug = Str::slug($request->title);
 
         $checkSlug = Post::where('slug', $slug)->first();
 

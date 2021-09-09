@@ -5,13 +5,8 @@ use App\Http\Controllers\Amin\CategoryController;
 use App\Http\Controllers\Amin\ContactController;
 use App\Http\Controllers\Amin\PostController;
 use App\Http\Controllers\Amin\UserController;
+use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-
-//    return \Redirect::to('admin/category');
-//    return view('welcome');
-});
 
 Route::prefix('admin')->group(function() {
     Route::get('login', [AuthController::class, 'login'])
@@ -98,3 +93,13 @@ Route::prefix('admin')->middleware('admin.login')->group(function() {
             ->name('admin.user.delete');
     });
 });
+
+Route::get('/', [WebController::class, 'home']);
+
+Route::get('category', [WebController::class, 'category']);
+Route::get('category/{slug}', [WebController::class, 'categorySlug'])
+    ->name('web.category');
+Route::get('post/{slug}', [WebController::class, 'post'])
+    ->name('web.post');
+Route::get('contact', [WebController::class, 'contact']);
+Route::post('contact', [WebController::class, 'sendContact']);
