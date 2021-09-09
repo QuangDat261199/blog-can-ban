@@ -101,5 +101,9 @@ Route::get('category/{slug}', [WebController::class, 'categorySlug'])
     ->name('web.category');
 Route::get('post/{slug}', [WebController::class, 'post'])
     ->name('web.post');
-Route::get('contact', [WebController::class, 'contact']);
-Route::post('contact', [WebController::class, 'sendContact']);
+Route::post('post/comment/{id}', [WebController::class, 'comment'])
+    ->name('web.post.comment');
+Route::get('contact', [WebController::class, 'contact'])
+    ->name('web.contact');
+Route::post('contact', [WebController::class, 'sendContact'])
+    ->name('web.contact.store');

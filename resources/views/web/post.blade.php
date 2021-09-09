@@ -113,23 +113,30 @@
 
                     <hr class="invis1">
 
+                    @if(\Illuminate\Support\Facades\Auth::check())
                     <div class="custombox clearfix">
                         <h4 class="small-title">Leave a Reply</h4>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="form-wrapper">
-                                    <input type="text" class="form-control" placeholder="Your name">
-                                    <input type="text" class="form-control" placeholder="Email address">
-                                    <input type="text" class="form-control" placeholder="Website">
-                                    <textarea class="form-control" placeholder="Your comment"></textarea>
+                                <form class="form-wrapper" method="post" action="{{ route('web.post.comment', $post->id) }}">
+                                    @csrf
+                                    <textarea class="form-control" name="content" placeholder="Your comment"></textarea>
                                     <button type="submit" class="btn btn-primary">Submit Comment</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div><!-- end page-wrapper -->
             </div><!-- end col -->
-
+{{--            <form class="form-wrapper" method="post" action="{{ route('web.post.comment', $post->id) }}">--}}
+{{--                @csrf--}}
+{{--                <input type="text" class="form-control" placeholder="Your name">--}}
+{{--                <input type="text" class="form-control" placeholder="Email address">--}}
+{{--                <input type="text" class="form-control" placeholder="Website">--}}
+{{--                <textarea class="form-control" placeholder="Your comment"></textarea>--}}
+{{--                <button type="submit" class="btn btn-primary">Submit Comment</button>--}}
+{{--            </form>--}}
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="sidebar">
 
