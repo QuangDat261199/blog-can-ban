@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Amin\AuthController;
 use App\Http\Controllers\Amin\CategoryController;
 use App\Http\Controllers\Amin\ContactController;
 use App\Http\Controllers\Amin\PostController;
 use App\Http\Controllers\Amin\UserController;
+use App\Http\Controllers\Web\AuthController as WebAuthController;
+use App\Http\Controllers\Amin\AuthController;
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -107,3 +108,16 @@ Route::get('contact', [WebController::class, 'contact'])
     ->name('web.contact');
 Route::post('contact', [WebController::class, 'sendContact'])
     ->name('web.contact.store');
+
+
+Route::get('login', [WebAuthController::class, 'formLogin']);
+Route::post('login', [WebAuthController::class, 'login'])
+    ->name('web.auth.login');
+Route::get('logout', [WebAuthController::class, 'logout']);
+
+Route::get('forgot-password', [WebAuthController::class, 'forgotPassword']);
+Route::post('send-mail-forgot-password', [WebAuthController::class, 'sendMail'])
+    ->name('send-mail');
+Route::get('reset-password', [WebAuthController::class, 'formReset'])->name('form-reset');
+Route::post('reset-password', [WebAuthController::class, 'resetPassword'])->name('reset-password');
+
